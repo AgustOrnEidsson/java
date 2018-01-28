@@ -1,0 +1,114 @@
+JavaScript - Verkefni 3
+
+1.Template literals eru strengir bókstafa sem leyfa embedded expressions. Þú getur notað multi-line strengi og strengi af annari náttúru með þeim. Svo eru til Nesting templates Innan “backticked” templates er auðvelt að leyfa innri “backtick-unum” með því að einfaldlega nota þær inni í “placeholders” $ {} innan template-sins.
+
+	Dæmi um multi-line streng:
+	console.log(`string text line 1
+		string text line 2`);
+
+	Dæmi um Nesting templates:
+	const classes = `header ${ isLargeScreen() ? '' :
+		 `icon-${(item.isCollapsed ? 'expander' : 'collapser')}` }`;
+
+2.For-in keyrir yfir ótal heiti objects.
+
+  For-of notar object-specific iterator og keyrir yfir values sem verða til af því.
+
+  For loopa endurtekur sig þar til að tiltekinu skilyrði verður false.
+
+3.
+  a) reverse()
+  b) sort()
+  c) shift() og splice()
+  d) join()
+
+4.
+  var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 209, 148, 169, 299, 6, 109, 20, 58, 139, 59, 3, 1, 139];
+
+  // Write your code here
+  function keyrsla(tala,tala2,listinn){
+      if (tala % 3 ===0){
+          tala +=100
+          listinn[tala2]= tala;
+      }
+      console.log(tala);}
+  test.forEach(keyrsla);
+  
+5.
+  Map () aðferðin býr til nýtt array kalla á function fyrir hvert einasta array element. Map() aðferðin kallar á functionið sem því hefur verið úthlutað einu sinni fyrir hvert element í arrayinu. Það gerir þetta í röð. 
+
+  var bills = [50.23, 19.12, 34.01, 100.11, 12.15, 9.90, 29.11, 12.99, 10.00, 99.22, 102.20, 100.10, 6.77, 2.22];
+  var totals= bills.map(function(tala) {
+  tala+= tala*0.15;
+  return Number((tala.toFixed(2)));
+  });
+  console.log(totals);
+  
+6.
+  var numbers = [
+  [243, 12, 23, 12, 45, 45, 78, 66, 223, 3],
+  [34, 2, 1, 553, 23, 4, 66, 23, 4, 55],
+  [67, 56, 45, 553, 44, 55, 5, 428, 452, 3],
+  [12, 31, 55, 445, 79, 44, 674, 224, 4, 21],
+  [4, 2, 3, 52, 13, 51, 44, 1, 67, 5],
+  [5, 65, 4, 5, 5, 6, 5, 43, 23, 4424],
+  [74, 532, 6, 7, 35, 17, 89, 43, 43, 66],
+  [53, 6, 89, 10, 23, 52, 111, 44, 109, 80],
+  [67, 6, 53, 537, 2, 168, 16, 2, 1, 8],
+  [76, 7, 9, 6, 3, 73, 77, 100, 56, 100]
+  ];
+    // your code goes here
+  for(var x=0;x < numbers.length; r ++){
+      for (var c=0; c< numbers[r].length;c++){
+          if (numbers[r][c] % 2 === 0) {
+              numbers[r][c]="even";
+  console.log(numbers[r][c]);  }
+   else {
+              numbers[r][c]="odd";
+              console.log(numbers[r][c]); }
+          }
+      }
+  console.log(numbers);
+
+7.
+  var breakfast = {
+      name:"The Lumberjack",
+      price: "$9.95",
+      ingredients: ["eggs","sausage","toast","hashbrowns","pancakes"]
+  }
+  
+8.
+  var savingsAccount = {
+      balance: 1000,
+      interestRatePercent: 1,
+      deposit: function addMoney(amount) {
+          if (amount > 0) {
+              savingsAccount.balance += amount;
+          }
+      },
+      withdraw: function removeMoney(amount) {
+          var verifyBalance = savingsAccount.balance - amount;
+          if (amount > 0 && verifyBalance >= 0) {
+              savingsAccount.balance -= amount;
+          }
+      },
+  // your code goes here
+  printAccountSummary:function  printAccountSummary() {
+  return "Welcome!\n"+ "Your balance is currently $" +savingsAccount.balance + " and your interest rate is " +savingsAccount.interestRatePercent +"%."
+      }
+  };
+  console.log(savingsAccount.printAccountSummary());
+  
+9.
+  var donuts = [
+      { type: "Jelly", cost: 1.22 },
+      { type: "Chocolate", cost: 2.45 },
+      { type: "Cider", cost: 1.59 },
+      { type: "Boston Cream", cost: 5.99 }
+  ];
+
+  // your code goes here
+  donuts.forEach(function(tegund){
+      console.log(tegund.type + " donuts cost $"+tegund.cost+" each");
+  })
+
