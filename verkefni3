@@ -1,6 +1,6 @@
 JavaScript - Verkefni 3
 
-Template literals eru strengir bókstafa sem leyfa embedded expressions. Þú getur notað multi-line strengi og strengi af annari náttúru með þeim. Svo eru til Nesting templates Innan “backticked” templates er auðvelt að leyfa innri “backtick-unum” með því að einfaldlega nota þær inni í “placeholders” $ {} innan template-sins.
+1. Template literals eru strengir bókstafa sem leyfa embedded expressions. Þú getur notað multi-line strengi og strengi af annari náttúru með þeim. Svo eru til Nesting templates Innan “backticked” templates er auðvelt að leyfa innri “backtick-unum” með því að einfaldlega nota þær inni í “placeholders” $ {} innan template-sins.
 
 	Dæmi um multi-line streng:
 	console.log(`string text line 1
@@ -10,16 +10,18 @@ Template literals eru strengir bókstafa sem leyfa embedded expressions. Þú ge
 	const classes = `header ${ isLargeScreen() ? '' :
 		 `icon-${(item.isCollapsed ? 'expander' : 'collapser')}` }`;
 
+2. For-in keyrir yfir ótal heiti objects.
 
-For-in keyrir yfir ótal heiti objects.
+   For-of notar object-specific iterator og keyrir yfir values sem verða til af því.
 
-For-of notar object-specific iterator og keyrir yfir values sem verða til af því.
+   For loopa endurtekur sig þar til að tiltekinu skilyrði verður false.
 
-For loopa endurtekur sig þar til að tiltekinu skilyrði verður false.
-a) reverse()
-b) sort()
-c) shift() og splice()
-d) join()
+3. 
+  a) reverse()
+  b) sort()
+  c) shift() og splice()
+  d) join()
+4.
 var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 209, 148, 169, 299, 6, 109, 20, 58, 139, 59, 3, 1, 139];
 
 // Write your code here
@@ -30,6 +32,8 @@ function keyrsla(tala,tala2,listinn){
     }
     console.log(tala);}
 test.forEach(keyrsla);
+
+5.
 Map () aðferðin býr til nýtt array kalla á function fyrir hvert einasta array element. Map() aðferðin kallar á functionið sem því hefur verið úthlutað einu sinni fyrir hvert element í arrayinu. Það gerir þetta í röð. 
 
 var bills = [50.23, 19.12, 34.01, 100.11, 12.15, 9.90, 29.11, 12.99, 10.00, 99.22, 102.20, 100.10, 6.77, 2.22];
@@ -38,6 +42,8 @@ tala+= tala*0.15;
 return Number((tala.toFixed(2)));
 });
 console.log(totals);
+
+6.
 var numbers = [
 [243, 12, 23, 12, 45, 45, 78, 66, 223, 3],
 [34, 2, 1, 553, 23, 4, 66, 23, 4, 55],
@@ -62,11 +68,15 @@ console.log(numbers[x][y]);  }
         }
     }
 console.log(numbers);
+
+7.
 var breakfast = {
     name:"The Lumberjack",
     price: "$9.95",
     ingredients: ["eggs","sausage","toast","hashbrowns","pancakes"]
 }
+
+8.
 var savingsAccount = {
     balance: 1000,
     interestRatePercent: 1,
@@ -87,6 +97,8 @@ return "Welcome!\n"+ "Your balance is currently $" +savingsAccount.balance + " a
     }
 };
 console.log(savingsAccount.printAccountSummary());
+
+9.
 var donuts = [
     { type: "Jelly", cost: 1.22 },
     { type: "Chocolate", cost: 2.45 },
@@ -98,3 +110,36 @@ var donuts = [
 donuts.forEach(function(tegund){
     console.log(tegund.type + " donuts cost $"+tegund.cost+" each");
 })
+10.
+var pizza1= {st:"Large", topping:"Pepperoni"};
+var pizza2= {st:"Small", topping:"Skinka og Ananas"};
+
+function pizza(pizza1,pizza2){
+	verd=0
+	verd1=0
+    if (pizza1.st==="Large"){
+        verd +=1000
+    }
+    if (pizza2.st==="Large"){
+        verd1 +=1000
+    }
+    if (pizza1.st==="Mið"){
+        verd +=800
+    }
+    if (pizza2.st==="Mið"){
+        verd1 +=800
+    }
+    if (pizza1.topping==="Skinka og Ananas"){
+        verd +=400
+    }
+    if (pizza2.topping==="Skinka og Ananas"){
+        verd1 +=800
+    }
+    if (pizza1.topping==="Pepperoni"){
+        verd +=800
+    }
+    if (pizza2.topping==="Pepperoni"){
+        verd1 +=800
+    }
+	
+    return "Pizza eitt "+pizza1.st+" með "+pizza1.topping+" verð: "+verd+"\n"+"Pizza tvö "+pizza2.st+" með "+pizza2.topping+" verð: "+verd1;}
