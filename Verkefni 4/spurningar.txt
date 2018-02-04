@@ -1,0 +1,42 @@
+2. Erfðir eða Inheritance virkar þannig að öll object sem eru child object í Javascript hafa öll Parent object. 
+   Það sem Child objectið gerir er að það erfir frá parent objectanum í gegnum prototype þannig að child object getur þá notað function sem að parent objectið á.
+   
+  function parent() { //hér bý ég til parent//
+     this.width = 10; //parent upplýsingarnar//
+     this.height = 20;
+  }
+
+  function child() { //hér bý ég til child//
+     parent.call(this); //hérna sækir gögn í parentinn//
+     this.opacity = 0.5; //og er svo með sínar eigin upplýsingar//
+     this.color = 'blue';
+  }
+
+3. Klassar eru "special functions" Það eru til tvær tegundir af classes og functions, expression og declaration.
+   
+   Class Expression geta verið named eða unnamed. Dæmi:
+   
+   // unnamed
+   var Rectangle = class {
+      constructor(height, width) {
+      this.height = height;
+      this.width = width;
+      }
+   };
+
+   // named
+   var Rectangle = class Rectangle {
+      constructor(height, width) {
+      this.height = height;
+      this.width = width;
+      }
+   };
+
+   Class Declaration munurinn á class og function er sá að classes eru ekki hoisted. Til að declara klassa þarftu að nota class keyword með nafni klassans. Dæmi:
+   
+   class Rectangle {
+  	constructor(height, width) {
+   	this.height = height;
+    	this.width = width;
+  	}
+   }
