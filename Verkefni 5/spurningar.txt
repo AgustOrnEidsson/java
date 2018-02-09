@@ -1,0 +1,15 @@
+býr til DOM tré
+
+1. Vegna þess að það leitar í öllu DOM tréinu. getElementById() hættir þegar það finnur id, það gerir það vegna þess að það á ekki að vera annað alvegeins id.                                                
+
+2. querySelectorAll() er mun dýrari en getElementById(). KLÁRA!!!!!!!!!!!!!!!!!!!
+
+3. var elements = document.getElementsByTagName('li');
+   if (elements.length > 0) {  //Nodelist hefur length property//
+ 	var el = elements[2];  //velur þriðja element//
+ 	el.className = 'cool'; //hægari aðferð sem NodeList á//
+        }
+
+4.
+
+5. Flest allir browserar bæta við next node þar sem er whitespace á milli elements 
