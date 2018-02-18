@@ -1,0 +1,2 @@
+let link = document.body.getElementsByTagName("a")[0];//sækir fyrsta a tagið og birtir linkinn í console
+console.log(link.href);
