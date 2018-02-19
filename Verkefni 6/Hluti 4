@@ -1,0 +1,6 @@
+TRADITIONAL DOM EVENT HANDLERS er þannig að javascript er ekki blandað saman með html og þú getur bara notað eitt function með event
+
+DOM LEVEL 2 EVENT LISTENERS þetta er eins og TRADITIONAL DOM EVENT HANDLERS  fyrir utan að þú getur notað helling af function
+með sama event, og það gerir þetta að bestu leiðinni
+
+HTML EVENT HANDLERS er þannig að það setur javascript inn í html
