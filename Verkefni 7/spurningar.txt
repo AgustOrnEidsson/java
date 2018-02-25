@@ -1,0 +1,24 @@
+1. function greeting(name) {//þetta fall þarf að fá argument
+	alert('Hello ' + name);//birtir Hello og svo argument með alert
+   }
+
+   function processUserInput(callback) {//þetta function er með argumenið callback sem verður fall
+	var name = prompt('Please enter your name.');//gerir varið name
+	callback(name);//hér tekur argumentið varið name og sendir í fallið sem callback er
+   }
+
+   processUserInput(greeting);//hér er kallað í fallið processUserInput og það tekur greeting sem argument
+   //þetta verður þá þannig að greeting fallið verður keyrt innan í processUserInput
+
+2. Það er biðröð fyrir callback functions.
+
+3.function checkUsername(e) {
+	var target = e.target;
+  }
+  var el = document.getElementById('username');
+  el.addEventListener('blur', checkUsername(el), false);
+
+4. Það er false þarna svo það keyri í bubbling phaseinu
+
+5. stopPropagation(), passar að það eventið frá bubbling og capturing phaseinu komist ekki upp DOM tréið
+   preventDefault(), er þannig að ef þetta er keyrt þá verður default actioninu ekki komið afstað
