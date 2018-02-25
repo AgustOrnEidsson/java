@@ -12,7 +12,7 @@ function adderino(spurning,svarmoguleikar,rettsvar){
 		svarStrengur='<ul id="parent-list">'
 		spurningaStrengur="<div>"+spurning+"</div>"
 		for (x in svarmoguleikar){
-			svarStrengur+="<li>"+svarmoguleikar[x]+"</li>";
+			svarStrengur+="<li id='svar'>"+svarmoguleikar[x]+"</li>";
 		}
 		spurningaStrengur+="</ul>"
 		strengur=spurningaStrengur+svarStrengur
@@ -21,6 +21,7 @@ function adderino(spurning,svarmoguleikar,rettsvar){
 function checkAnswer(){
 	let targetElement = event.target || event.srcElement;
     for(x = 0; x < listi.length; x++){
+    	targetElement.classList.add("litur");
     	if (targetElement.textContent == listi[x].rettsvar){
     		adderino(listi[1].spurning,listi[1].svarmoguleikar,listi[1].rettsvar);
     		let drasl=document.getElementById("quiz").children
@@ -28,20 +29,12 @@ function checkAnswer(){
     		drasl[0].remove()
 
     	}
-    	else{
-    	targetElement.style.color="red";
-    }
     }
     
 };
 for(x = 0; x < listi.length; x++){
 	adderino(listi[x].spurning,listi[x].svarmoguleikar,listi[x].rettsvar);
-	let spurningin = document.getElementById("quiz").children
-	let svarmoguleikarnir = spurningin[1].children
-	let i;
-	let texti = ""
-	for (i = 0; i < svarmoguleikarnir.length; i++) {
-	    svarmoguleikarnir[i].addEventListener("click", checkAnswer, false);
-	    }
-	console.log("nein")
+	var dot= document.getElementById("parent-list")
+
+	dot.addEventListener("click", checkAnswer, false);
 	}
