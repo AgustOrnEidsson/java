@@ -16,9 +16,12 @@ var menu=function () {
   ctx.font="50px Impact";
   ctx.fillStyle="#9b42f4";
   ctx.textAlign="center";
-  ctx.fillText("Kallinn",canvas.width/2,canvas.height/2-30);
-  ctx.font="20px Arial";
-  ctx.fillText("Ýttu á 'space' til að halda áfram",canvas.width/2,canvas.height/2+50)
+  ctx.fillText("Ævintýri Jónatans",canvas.width/2,canvas.height/2-40);
+  ctx.font="25px Arial";
+  ctx.fillText("Ýttu á 'space' til að halda áfram",canvas.width/2,canvas.height/2+10)
+  ctx.fillStyle="#722a12";
+  ctx.fillText("Örvatakkar til að hreyfa",canvas.width/2,canvas.height/2+60)
+  ctx.fillText("'space' til að interacta",canvas.width/2,canvas.height/2+90)
   if (32 in keysDown) {
     game();
   }
@@ -28,7 +31,6 @@ var menu=function () {
 };
 
 var game=function(){
-  console.log("ok, ok")
   var ground = [
    [14, 15, 14, 15, 34, 34, 34, 34, 34, 34, 34, 34, 56, 57, 54, 55, 56, 147, 67, 67, 68, 14, 15, 14, 15, 14, 15, 14, 15, 55, 55, 55],
    [30, 172, 172, 79, 34, 34, 34, 34, 34, 34, 146, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 155, 142, 172, 159, 189, 79, 79, 55, 55, 55],
@@ -106,14 +108,14 @@ var game=function(){
   wizimg.src = "view/wizard.png";
 
 
-  var heroReady = false;
-  var heroImage = new Image();
-  heroImage.onload = function () {
-    heroReady = true;
+  var jonatanReady = false;
+  var jonatanImage = new Image();
+  jonatanImage.onload = function () {
+    jonatanReady = true;
   };
-  heroImage.src = "view/hero.png";
+  jonatanImage.src = "view/hero.png";
 
-  var hero = {
+  var jonatan = {
     speed: 200
   };
 
@@ -129,44 +131,44 @@ var game=function(){
     delete keysDown[e.keyCode];
   }, false);
 
-  hero.x=520;
-  hero.y=340;
+  jonatan.x=520;
+  jonatan.y=340;
   wiz.x=835
   wiz.y=220
 
   var reset = function () {
-    hero.x = hero.x;
-    hero.y = hero.y;
+    jonatan.x = jonatan.x;
+    jonatan.y = jonatan.y;
   };
   mission="down"
   var update = function (modifier) {
     if (38 in keysDown) {
-      hero.y -= hero.speed * modifier;
+      jonatan.y -= jonatan.speed * modifier;
     }
     if (40 in keysDown) {
-      hero.y += hero.speed * modifier;
+      jonatan.y += jonatan.speed * modifier;
     }
     if (37 in keysDown) {
-      hero.x -= hero.speed * modifier;
+      jonatan.x -= jonatan.speed * modifier;
     }
     if (39 in keysDown) {
-      hero.x += hero.speed * modifier;
+      jonatan.x += jonatan.speed * modifier;
     }
-    if (hero.y<=30) {
-      hero.y=31
+    if (jonatan.y<=30) {
+      jonatan.y=31
     }
-    if (hero.y>=580) {
-      hero.y=579
+    if (jonatan.y>=580) {
+      jonatan.y=579
     }
-    if (hero.x<=30) {
-      hero.x=31
+    if (jonatan.x<=30) {
+      jonatan.x=31
     }
-    if (hero.x>=960) {
-      hero.x=959
+    if (jonatan.x>=960) {
+      jonatan.x=959
     }
 
-    if(217<hero.y && hero.y<300){
-      if (796<hero.x && hero.x<895) {
+    if(217<jonatan.y && jonatan.y<300){
+      if (796<jonatan.x && jonatan.x<895) {
         if (32 in keysDown) {
           mission="in-progress"
           console.log(mission)
@@ -185,8 +187,8 @@ var game=function(){
     }
 
 
-  if (heroReady) {
-      ctx.drawImage(heroImage, hero.x, hero.y);
+  if (jonatanReady) {
+      ctx.drawImage(jonatanImage, jonatan.x, jonatan.y);
     }
   };
 
