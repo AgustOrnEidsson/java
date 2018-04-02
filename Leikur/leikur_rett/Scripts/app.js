@@ -1,37 +1,41 @@
-var canvas = document.getElementById('main');
+//Ágúst Örn Eiðsson
+//Leikur Javascript 20%
+
+var canvas = document.getElementById('main');//sæki canvasinn main
 var ctx = canvas.getContext('2d');
 
 
-var keysDown = {};
+var keysDown = {};//bý til object sem geymir hvort það sé verið að ýta á takka
 
-  addEventListener("keydown", function (e) {
-    keysDown[e.keyCode] = true;
+  addEventListener("keydown", function (e) {//bý til eventlistener sem finnur hvaða takki er niðri
+    keysDown[e.keyCode] = true;//og bæti takka keycodeinu í keysdown
   }, false);
 
-  addEventListener("keyup", function (e) {
-    delete keysDown[e.keyCode];
+  addEventListener("keyup", function (e) {//ef það er sleppt takkanum
+    delete keysDown[e.keyCode];//þá er takkanum eytt úr keysdown
   }, false);
 
-var menu=function () {
-  ctx.font="50px Impact";
-  ctx.fillStyle="#9b42f4";
-  ctx.textAlign="center";
-  ctx.fillText("Ævintýri Jónatans",canvas.width/2,canvas.height/2-40);
-  ctx.font="25px Arial";
-  ctx.fillText("Ýttu á 'space' til að halda áfram",canvas.width/2,canvas.height/2+10)
-  ctx.fillStyle="#722a12";
+var menu=function () {//bý til menuið
+  ctx.font="50px Impact";//vel font
+  ctx.fillStyle="#9b42f4";//og lit á texta
+  ctx.textAlign="center";//passa að textinn sé í miðjunni
+  ctx.fillText("Ævintýri Jónatans",canvas.width/2,canvas.height/2-40);//skrifa textan sem ég vil að birtist og set hann fyrir miðju
+  ctx.font="25px Arial";//breyti um font
+  ctx.fillText("Ýttu á 'space' til að halda áfram",canvas.width/2,canvas.height/2+10)//annar texti sem verður fyrir neðan þann fyrri
+  ctx.fillStyle="#722a12";//breyti um lit
   ctx.fillText("Örvatakkar til að hreyfa",canvas.width/2,canvas.height/2+60)
   ctx.fillText("'space' til að interacta",canvas.width/2,canvas.height/2+90)
-  if (32 in keysDown) {
-    game();
+  if (32 in keysDown) {//býð þangað til að það sé ýtt á 'space'
+    game();//ef það er ýtt á space þá fer það í leikinn
   }
   else{
-    requestAnimationFrame(menu);
+    requestAnimationFrame(menu);//annars gerist ekkert
   }
 };
 
-var game=function(){
-  var ground = [
+var game=function(){//hérna byrjar leikurinn
+  //hver tala er númer á tile á myndii image.png
+  var ground = [//basic foundation fyrir kortið
    [14, 15, 14, 15, 34, 34, 34, 34, 34, 34, 34, 34, 56, 57, 54, 55, 56, 147, 67, 67, 68, 14, 15, 14, 15, 14, 15, 14, 15, 55, 55, 55],
    [30, 172, 172, 79, 34, 34, 34, 34, 34, 34, 146, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 155, 142, 172, 159, 189, 79, 79, 55, 55, 55],
    [14, 172, 172, 79, 79, 34, 34, 34, 34, 34, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 79, 171, 172, 159, 189, 79, 79, 79, 55, 55, 55],
@@ -54,7 +58,7 @@ var game=function(){
    [34, 34, 34, 34, 34, 34, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15, 14, 15]
    ];
 
-   var layer1 = [
+   var layer1 = [//annar layer sem gerir kortið fallegra
    [0, 0, 32, 33, 0, 236, 0, 0, 236, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 0, 32, 33],
    [0, 0, 48, 49, 0, 236, 220, 220, 236, 0, 0, 147, 72, 73, 70, 71, 72, 73, 83, 83, 84, 85, 0, 0, 0, 0, 0, 48, 49],
    [0, 0, 64, 65, 54, 0, 236, 236, 0, 0, 162, 163, 84, 89, 86, 87, 88, 89, 99, 99, 100, 101, 0, 0, 0, 0, 7, 112, 113],
@@ -78,17 +82,17 @@ var game=function(){
    ];
 
 
-  var tilesetImage = new Image();
-  tilesetImage.src = 'view/image.png';
-  tilesetImage.onload = drawImage;
-  var tileSize = 32;
-  var rowTileCount = 20;
-  var colTileCount = 32;
+  var tilesetImage = new Image();//geri var sem geymir mynd
+  tilesetImage.src = 'view/image.png';//sæki myndina
+  tilesetImage.onload = drawImage;//teiknar myndina þegar það er loadað
+  var tileSize = 32;//hver tile er 32 pixlar
+  var rowTileCount = 20;//það eru 20 tiles á hlið á sjálfri myndinni
+  var colTileCount = 32;//og 32 niður
   var imageNumTiles = 16;
-  function drawImage () {
-     for (var r = 0; r < rowTileCount; r++) {
-     for (var c = 0; c < colTileCount; c++) {
-        var tile = ground[ r ][ c ];
+  function drawImage () {//byrja að teikna myndina
+     for (var r = 0; r < rowTileCount; r++) {//fer tile fyrir tile til hliðar
+     for (var c = 0; c < colTileCount; c++) {//fer tile fyrir tile niður
+        var tile = ground[ r ][ c ];//sækir tölu ú ground
         var tileRow = (tile / imageNumTiles) | 0;
         var tileCol = (tile % imageNumTiles) | 0;
         ctx.drawImage(tilesetImage, (tileCol * tileSize), (tileRow * tileSize), tileSize, tileSize, (c * tileSize), (r * tileSize), tileSize, tileSize);
@@ -100,12 +104,12 @@ var game=function(){
       }
     }
 
-  var wizred = false;
+  var wizred = false;//bý til wizred sem er false
   var wizimg = new Image();
-  wizimg.onload = function () {
-    wizred = true;
+  wizimg.onload = function () {//þegar myninni er loadað þá 
+    wizred = true;//segi ég að myndin sé ready
   };
-  wizimg.src = "view/wizard.png";
+  wizimg.src = "view/wizard.png";//sæki myndina
 
 
   var jonatanReady = false;
@@ -115,11 +119,11 @@ var game=function(){
   };
   jonatanImage.src = "view/hero.png";
 
-  var jonatan = {
-    speed: 200
+  var jonatan = {//bý til objectið jonatan
+    speed: 200//sem er með hraðann 200
   };
 
-  var wiz = {};
+  var wiz = {};//bý til objectið wiz
 
   var keysDown = {};
 
@@ -131,29 +135,24 @@ var game=function(){
     delete keysDown[e.keyCode];
   }, false);
 
-  jonatan.x=520;
+  jonatan.x=520;//vel byrjunar stöðu
   jonatan.y=340;
-  wiz.x=835
-  wiz.y=220
 
-  var reset = function () {
-    jonatan.x = jonatan.x;
-    jonatan.y = jonatan.y;
-  };
-  mission="down"
+  mission="down"//segi til um stöðu missionsins
   var update = function (modifier) {
     if (38 in keysDown) {
-      jonatan.y -= jonatan.speed * modifier;
+      jonatan.y -= jonatan.speed * modifier;//ef ýtt er upp
     }
     if (40 in keysDown) {
-      jonatan.y += jonatan.speed * modifier;
+      jonatan.y += jonatan.speed * modifier;//ef ýtt er niður
     }
     if (37 in keysDown) {
-      jonatan.x -= jonatan.speed * modifier;
+      jonatan.x -= jonatan.speed * modifier;//eft ýtt er til vinstri
     }
     if (39 in keysDown) {
-      jonatan.x += jonatan.speed * modifier;
+      jonatan.x += jonatan.speed * modifier;//ef ýtt er til hægri
     }
+    //set upp border svo playerinn seti ekki farið út af kortinu
     if (jonatan.y<=30) {
       jonatan.y=31
     }
@@ -167,11 +166,10 @@ var game=function(){
       jonatan.x=959
     }
 
-    if(217<jonatan.y && jonatan.y<300){
+    if(217<jonatan.y && jonatan.y<300){//passa að playerinn sé nálægt wizardnum til að geta tekið við missioninu
       if (796<jonatan.x && jonatan.x<895) {
         if (32 in keysDown) {
-          mission="in-progress"
-          console.log(mission)
+          mission="in-progress"//segi til um að mission sé í progress
         }
       }
     }
@@ -180,35 +178,32 @@ var game=function(){
     }
   };
 
-
-  var render = function () {
+  var render = function () {//þetta fall renderar inn myndunum
     if (wizred) {
-      ctx.drawImage(wizimg, wiz.x, wiz.y,50,50);
+      ctx.drawImage(wizimg, 835, 220,50,50);
     }
 
-
-  if (jonatanReady) {
-      ctx.drawImage(jonatanImage, jonatan.x, jonatan.y);
-    }
+    if (jonatanReady) {
+        ctx.drawImage(jonatanImage, jonatan.x, jonatan.y);
+      }
   };
 
-  var main = function () {
-    drawImage();
-    var now = Date.now();
+  var main = function () {//þetta er límið, þetta er fallið sem tengir allt saman
+    drawImage();//kallar í drawImage
+    var now = Date.now();//finn tíma núna
     var delta = now - then;
 
-    update(delta / 1000);
+    update(delta / 1000);//kalla í update
     render();
 
     then = now;
 
-    requestAnimationFrame(main);
+    requestAnimationFrame(main);//keyri aftur
   };
 
   var w = window;
 
   var then = Date.now();
-  reset();
   w.requestAnimationFrame(main)
 };
 
