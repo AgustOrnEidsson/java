@@ -10,5 +10,8 @@
 }
 body{
 	background-image: url("bak.jpg");
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
     cursor: none;
 }

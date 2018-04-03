@@ -111,6 +111,8 @@ var game=function(){//hérna byrjar leikurinn
   };
   wizimg.src = "view/wizard.png";//sæki myndina
 
+  var bubble = new Image();
+  bubble.src = "view/bubble.png";
 
   var jonatanReady = false;
   var jonatanImage = new Image();
@@ -118,6 +120,19 @@ var game=function(){//hérna byrjar leikurinn
     jonatanReady = true;
   };
   jonatanImage.src = "view/hero.png";
+
+  var blomred = false;
+  var blomimg = new Image();
+  blomimg.onload = function () {
+    blomred = true;
+  };
+  blomimg.src = "view/blom.png";
+
+  mission=false
+  missiontext="Blómum Safnað: "
+
+  var blom = {};
+  var blominv = 0;
 
   var jonatan = {//bý til objectið jonatan
     speed: 200//sem er með hraðann 200
@@ -138,18 +153,25 @@ var game=function(){//hérna byrjar leikurinn
   jonatan.x=520;//vel byrjunar stöðu
   jonatan.y=340;
 
-  mission="down"//segi til um stöðu missionsins
+  var reset=function(){
+    blom.x = 32 + (Math.random() * (canvas.width - 64));//sendi blóm á random staði að minsta kosti 32 pixlum frá seinustu staðsetningu
+    blom.y = 32 + (Math.random() * (canvas.height - 64));
+  };
+
+  tex=280//stað setning texta í talbólu
+  tey=430
+
   var update = function (modifier) {
-    if (38 in keysDown) {
+    if (38 in keysDown || 87 in keysDown) {
       jonatan.y -= jonatan.speed * modifier;//ef ýtt er upp
     }
-    if (40 in keysDown) {
+    if (40 in keysDown || 83 in keysDown) {
       jonatan.y += jonatan.speed * modifier;//ef ýtt er niður
     }
-    if (37 in keysDown) {
+    if (37 in keysDown || 65 in keysDown) {
       jonatan.x -= jonatan.speed * modifier;//eft ýtt er til vinstri
     }
-    if (39 in keysDown) {
+    if (39 in keysDown || 68 in keysDown) {
       jonatan.x += jonatan.speed * modifier;//ef ýtt er til hægri
     }
     //set upp border svo playerinn seti ekki farið út af kortinu
@@ -165,27 +187,57 @@ var game=function(){//hérna byrjar leikurinn
     if (jonatan.x>=960) {
       jonatan.x=959
     }
-
     if(217<jonatan.y && jonatan.y<300){//passa að playerinn sé nálægt wizardnum til að geta tekið við missioninu
       if (796<jonatan.x && jonatan.x<895) {
-        if (32 in keysDown) {
-          mission="in-progress"//segi til um að mission sé í progress
-        }
+        ctx.drawImage(bubble, 592, 170,310,80);//birtist talbóla ef þú ert nógu nálægt
+        ctx.font="15px Impact";
+        ctx.fillStyle="#000000";
+        ctx.fillText("Geturðu sótt handa mér 5 blóm fyrir seiðið mitt",canvas.width-tex,canvas.height-tey);
+        if (32 in keysDown) {//ef ýtt er á space þá tekurðu missioninu
+          mission=true
+          }
       }
     }
-    if (mission=="in-progress"){
-
+    if (
+      jonatan.x <= (blom.x + 32)//passa að ég sé nálægt blóminu
+      && blom.x <= (jonatan.x + 32)
+      && jonatan.y <= (blom.y + 32)
+      && blom.y <= (jonatan.y + 32)
+    ) {
+      if (32 in keysDown && mission) {//ef þú ert að spila missionið og ýtir á space
+        ++blominv;//þá tekurðu upp blómið og annað birtist
+        reset();
+      }
+    }
+    if(blominv==5){//þegar þú færð öll 5 blóminn
+      blom.x=800//fer blómið út af kortinu svo ekki sé hægt að taka það upp
+      blom.y=800
+      missiontext="Öllum blómum hefur verið safnað"//breyti texta
+      blominv=""
     }
   };
 
   var render = function () {//þetta fall renderar inn myndunum
     if (wizred) {
-      ctx.drawImage(wizimg, 835, 220,50,50);
+      ctx.drawImage(wizimg, 835, 220,50,50);//teikna myndina fyrst x svo y staðsetning. Svo stærð í pixlum x og y
     }
 
     if (jonatanReady) {
         ctx.drawImage(jonatanImage, jonatan.x, jonatan.y);
-      }
+    }
+    if (blomred) {
+      ctx.drawImage(blomimg, blom.x, blom.y,30,30);
+    }
+    if(mission){//ef þú ert búinn að taka missioninu
+      ctx.fillStyle = "rgb(64, 224, 208)";//þá birtist texti sem uppfærir sig
+      ctx.font = "24px Helvetica";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      ctx.fillText(missiontext + blominv, 5, 5);
+      tex=422
+      tey=448
+    }
+
   };
 
   var main = function () {//þetta er límið, þetta er fallið sem tengir allt saman
@@ -200,6 +252,7 @@ var game=function(){//hérna byrjar leikurinn
 
     requestAnimationFrame(main);//keyri aftur
   };
+  reset();
 
   var w = window;
 
